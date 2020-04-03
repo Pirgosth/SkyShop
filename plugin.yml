@@ -1,0 +1,14 @@
+name: SkyShop
+main: com.pirgosth.skyshop.Load
+version: 1.0
+api-version: 1.15
+depend: [Vault]
+softdepend: [Multiverse-Core]
+command-complete: true
+author: Pirgosth
+commands:
+  shop:
+    description: Open Shop
+    usage: /<command> [name]
+permissions:
+  

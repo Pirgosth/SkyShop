@@ -1,0 +1,17 @@
+enabled-worlds: []
+shop:
+  farming:
+    name: Farming
+    x: 0
+    y: 0
+    material: WHEAT
+    description: []
+    items:
+      wheat:
+        name: Wheat
+        x: 0
+        y: 0
+        material: WHEAT_SEED
+        buy: 1000
+        sell: 10
+        description: []
