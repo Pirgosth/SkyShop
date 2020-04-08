@@ -12,6 +12,10 @@ public class EventListener implements Listener{
 			return;
 		}
 		event.setCancelled(true);
+		if(event.getClickedInventory() == null || event.getClickedInventory().getHolder() != Load.shop) {
+			return;
+		}
+		Load.shop.onClick(event);
 //		if(event.getSlot() == 3) {
 //			Player player = (Player) event.getWhoClicked();
 //			if(Load.economy.withdrawPlayer(player, 100).type == EconomyResponse.ResponseType.SUCCESS) {

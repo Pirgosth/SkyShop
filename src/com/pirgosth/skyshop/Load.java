@@ -14,6 +14,7 @@ public class Load extends JavaPlugin{
 	
 	public Load() {
 		config = new Config(this);
+		shop = new Shop();
 	}
 	
 	public static Economy economy = null;
@@ -40,7 +41,7 @@ public class Load extends JavaPlugin{
 		}
 		config.load();
 		try {
-			shop = new Shop();
+			shop.load();
 		}
 		catch(Exception e) {
 			Bukkit.getLogger().log(Level.WARNING, e.toString());

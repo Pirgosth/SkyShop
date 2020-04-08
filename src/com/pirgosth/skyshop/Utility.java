@@ -7,6 +7,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 public class Utility {
 	public static ArrayList<String> getWorldNames(){
@@ -37,8 +39,41 @@ public class Utility {
 	}
 	
 	public static void colorTranslate(List<String> texts) {
+		if(texts == null) {
+			return;
+		}
 		for(int i = 0; i<texts.size(); i++) {
 			texts.set(i, colorTranslate(texts.get(i)));
 		}
+	}
+	
+	public static boolean canFitInInventory(ItemStack stack, Inventory inv) {
+		int emptyCount = 0;
+		int requiredSlots = stack.getAmount()/64 + (stack.getAmount()%64 == 0 ? 0 : 1);
+		int emptyStacks = 0;
+		for(ItemStack slot: inv.getStorageContents()) {
+			if(slot == null || slot.getType() == Material.AIR) {
+				emptyCount ++;
+				emptyStacks += 64;
+			}
+			if(slot != null && slot.getType() == stack.getType()) {
+				emptyStacks += (64-slot.getAmount());
+			}
+			if(emptyCount >= requiredSlots || emptyStacks >= stack.getAmount()) return true;
+		}
+		return false;
+	}
+	
+	public static int countInInventory(ItemStack stack, Inventory inv) {
+		int amount = 0;
+		for(ItemStack slot: inv.getStorageContents()) {
+			if(slot == null || slot.getType() == Material.AIR) {
+				continue;
+			}
+			if(slot.getType() == stack.getType()) {
+				amount += slot.getAmount();
+			}
+		}
+		return amount;
 	}
 }

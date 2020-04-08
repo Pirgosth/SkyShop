@@ -5,13 +5,13 @@ import java.util.List;
 
 import org.bukkit.Material;
 
-public class ShopItem {
+public class Item {
 	private Material material;
 	private int index;
 	private String name;
 	private ArrayList<String> description;
 	
-	public ShopItem(String name, int x, int y, Material material, List<String> description) throws Exception{
+	public Item(String name, int x, int y, Material material, List<String> description) throws Exception{
 		this.name = name;
 		try {
 			this.index = Utility.getIndex(x, y);
@@ -23,7 +23,7 @@ public class ShopItem {
 		this.description = new ArrayList<String>(description);
 	}
 	
-	public ShopItem(String name, int x, int y, String material, List<String> description) throws Exception{
+	public Item(String name, int x, int y, String material, List<String> description) throws Exception{
 		this.name = name;
 		try {
 			this.index = Utility.getIndex(x, y);
@@ -49,5 +49,9 @@ public class ShopItem {
 	
 	public int index() {
 		return index;
+	}
+	
+	public void onClick() {
+		
 	}
 }
