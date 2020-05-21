@@ -3,9 +3,12 @@ package com.pirgosth.skyshop.GUIInventory;
 import java.util.ArrayList;
 
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.pirgosth.skyshop.Load;
 import com.pirgosth.skyshop.Utility;
 
 public class TradeButton extends ChangeInvButton{
@@ -21,11 +24,14 @@ public class TradeButton extends ChangeInvButton{
 	
 	private void loadLore() {
 		ArrayList<String> lore = new ArrayList<String>();
-		if(buy != 0) lore.add("&7Buy: &2" + buy + "&7$");
-		if(sell != 0) lore.add("&7Sell: &2" + sell + "&7$");
+		if(buy != -1) lore.add("&7Buy: &2" + buy + "&7$");
+		if(sell != -1) lore.add("&7Sell: &2" + sell + "&7$");
 		lore.add("");
-		if(buy != 0) lore.add("&7&lLeft clic to buy");
-		if(sell != 0) lore.add("&7&lRight clic to sell");
+		if(buy != -1) lore.add("&7&lLeft clic to buy");
+		if(sell != -1) {
+			lore.add("&7&lMiddle clic to sell all");
+			lore.add("&7&lRight clic to sell");
+		}
 		Utility.colorTranslate(lore);
 		ItemMeta meta = stack.getItemMeta();
 		meta.setLore(lore);
@@ -36,12 +42,14 @@ public class TradeButton extends ChangeInvButton{
 	public void onClick(InventoryClickEvent event) {
 		switch(event.getClick()) {
 			case LEFT:
-				next = buy != 0 ? new BuyMenu(this) : null;
+				this.next = this.buy != -1 ? new BuyMenu(this) : null;
 				break;
 			case RIGHT:
-				next = sell != 0 ? new SellMenu(this) : null;
+				this.next = this.sell != -1 ? new SellMenu(this) : null;
 				break;
 			case MIDDLE:
+				this.next = null;
+				sellEverything(event);
 				break;
 			default:
 				break;
@@ -57,4 +65,16 @@ public class TradeButton extends ChangeInvButton{
 		return sell;
 	}
 	
+	public void sellEverything(InventoryClickEvent event) {
+		Player player = (Player) event.getWhoClicked();
+		int amount = Utility.countInInventory(stack, player.getInventory());
+		if(amount == 0) {
+			player.sendMessage(Utility.colorTranslate("&2[SkyShop] &7You have no &4" + name() + " &7to sell."));
+			return;
+		}
+		double price = sell*amount;
+		player.getInventory().removeItem(new ItemStack(type(), amount));
+		Load.economy.depositPlayer(player, price);
+		player.sendMessage(Utility.colorTranslate("&2[SkyShop] &7You sold &2x" + amount + " " + name() + " &7for &2" + price + "$"));
+	}
 }

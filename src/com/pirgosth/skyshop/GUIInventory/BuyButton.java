@@ -39,5 +39,4 @@ public class BuyButton extends Button{
 			player.sendMessage(Utility.colorTranslate("&2[SkyShop] &7You need &4" + (price-Load.economy.getBalance(player)) + "$ &7to buy this."));
 		}
 	}
-
 }
