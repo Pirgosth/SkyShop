@@ -1,4 +1,4 @@
-package com.pirgosth.skyshop.GUIInventory;
+package io.github.pirgosth.skyshop.GUIInventory;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.pirgosth.skyshop.Load;
-import com.pirgosth.skyshop.Utility;
+import io.github.pirgosth.skyshop.SkyShop;
+import io.github.pirgosth.skyshop.Utility;
 
 public class SellButton extends Button {
 	TradeMenu parent;
@@ -17,7 +17,7 @@ public class SellButton extends Button {
 		super(name, type, x, y, lore, 1, parent);
 		this.parent = parent;
 	}
-	
+
 	@Override
 	public void onClick(InventoryClickEvent event) {
 		int amount = parent.amount();
@@ -26,14 +26,15 @@ public class SellButton extends Button {
 		Material type = parent.item().type();
 		Player player = (Player) event.getWhoClicked();
 		int playerAmount = Utility.countInInventory(new ItemStack(type, amount), player.getInventory());
-		if(playerAmount < amount){
-			player.sendMessage(Utility.colorTranslate("&2[SkyShop] &7You need &4x" + (amount-playerAmount) + " &r" + name + " &7to perform this."));
+		if (playerAmount < amount) {
+			player.sendMessage(Utility.colorTranslate(
+					"&2[SkyShop] &7You need &4x" + (amount - playerAmount) + " &r" + name + " &7to perform this."));
 			return;
-		}
-		else {
+		} else {
 			player.getInventory().removeItem(new ItemStack(type, amount));
-			Load.economy.depositPlayer(player, price);
-			player.sendMessage(Utility.colorTranslate("&2[SkyShop] &7You sold &2x" + amount + " " + name + " &7for &2" + price + "$"));
+			SkyShop.getEconomy().depositPlayer(player, price);
+			player.sendMessage(Utility
+					.colorTranslate("&2[SkyShop] &7You sold &2x" + amount + " " + name + " &7for &2" + price + "$"));
 		}
 	}
 }

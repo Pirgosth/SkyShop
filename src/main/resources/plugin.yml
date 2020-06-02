@@ -1,0 +1,25 @@
+name: SkyShop
+main: io.github.pirgosth.skyshop.SkyShop
+version: 1.0
+api-version: 1.15
+depend: [Vault]
+softdepend: [Multiverse-Core]
+command-complete: true
+author: Pirgosth
+commands:
+  shop:
+    description: Open Shop
+    usage: /<command>
+permissions:
+  skyshop.command.reload:
+    description: Allow reload command
+    default: op
+  skyshop.command.shop:
+    description: Allow shop command
+    default: op
+  skyshop.command.*:
+    description: Grant command wildcard permissions
+    children:
+      skyshop.command.reload: true
+      skyshop.command.shop: true
+      

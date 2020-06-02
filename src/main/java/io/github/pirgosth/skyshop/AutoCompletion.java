@@ -1,4 +1,4 @@
-package com.pirgosth.skyshop;
+package io.github.pirgosth.skyshop;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,13 +9,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.util.StringUtil;
 
-public class AutoCompletion implements TabCompleter{
+public class AutoCompletion implements TabCompleter {
 
 	@Override
-	public List<String> onTabComplete(CommandSender sender, Command cmd,
-			String label, String[] args) {
+	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
 		ArrayList<String> completions = new ArrayList<String>();
-		if(args.length == 1) {
+		if (args.length == 1) {
 			StringUtil.copyPartialMatches(args[0], Arrays.asList("reload"), completions);
 		}
 		return completions;
