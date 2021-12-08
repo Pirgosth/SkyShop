@@ -1,5 +1,6 @@
 Builds
 bin
+.idea
 .settings
 .classpath
 .project

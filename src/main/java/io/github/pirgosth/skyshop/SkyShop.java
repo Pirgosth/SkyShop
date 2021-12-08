@@ -2,6 +2,10 @@ package io.github.pirgosth.skyshop;
 
 import java.util.logging.Level;
 
+import io.github.pirgosth.liberty.core.LibertyCore;
+import io.github.pirgosth.liberty.core.api.LibertyCoreAPI;
+import io.github.pirgosth.skyshop.commands.AdminCommands;
+import io.github.pirgosth.skyshop.commands.Commands;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,7 +17,7 @@ public class SkyShop extends JavaPlugin {
 	@Getter
 	private static JavaPlugin instance = null;
 	@Getter
-	private static Config mainConfig = null;
+	private static IConfig mainConfig = null;
 	@Getter
 	private static Shop shop = null;
 	@Getter
@@ -28,7 +32,7 @@ public class SkyShop extends JavaPlugin {
 			return false;
 		}
 		economy = rsp.getProvider();
-		return (economy != null);
+		return true;
 	}
 
 	@Override
@@ -49,8 +53,11 @@ public class SkyShop extends JavaPlugin {
 		} catch (Exception e) {
 			Bukkit.getLogger().log(Level.WARNING, e.toString());
 		}
-		getCommand("shop").setExecutor(new Commands());
-		getCommand("shop").setTabCompleter(new AutoCompletion());
+
+		LibertyCoreAPI coreAPI = LibertyCore.getInstance();
+		coreAPI.getCommandRegister().register(this, new Commands());
+		coreAPI.getCommandRegister().register(this, new AdminCommands());
+//		getCommand("shop").setTabCompleter(new AutoCompletion());
 		getServer().getPluginManager().registerEvents(new EventListener(), this);
 	}
 
