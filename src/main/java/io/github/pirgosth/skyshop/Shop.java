@@ -1,25 +1,26 @@
 package io.github.pirgosth.skyshop;
 
-import java.util.HashMap;
-import java.util.logging.Level;
-
+import io.github.pirgosth.skyshop.GUIInventory.Button;
+import io.github.pirgosth.skyshop.GUIInventory.ChangeInvButton;
+import io.github.pirgosth.skyshop.GUIInventory.Menu;
+import io.github.pirgosth.skyshop.GUIInventory.TradeButton;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.jetbrains.annotations.NotNull;
 
-import io.github.pirgosth.skyshop.GUIInventory.Button;
-import io.github.pirgosth.skyshop.GUIInventory.ChangeInvButton;
-import io.github.pirgosth.skyshop.GUIInventory.Menu;
-import io.github.pirgosth.skyshop.GUIInventory.TradeButton;
+import java.util.HashMap;
+import java.util.logging.Level;
 
 public class Shop implements InventoryHolder {
+
 	private Menu shop;
 	private HashMap<Player, Menu> players;
 
 	public Shop() {
-		players = new HashMap<Player, Menu>();
+		players = new HashMap<>();
 	}
 
 	public void load() throws Exception {
@@ -27,21 +28,22 @@ public class Shop implements InventoryHolder {
 			shop = SkyShop.getMainConfig().loadShop();
 		} catch (Exception e) {
 			Bukkit.getLogger().log(Level.WARNING, "SkyShoping Default Config ...");
-			this.loadDefautShop();
+			this.loadDefaultShop();
 			throw e;
 		}
 	}
 
 	public void reload() throws Exception {
-		players = new HashMap<Player, Menu>();
+		players = new HashMap<>();
 		load();
 		// shop.getInventory().setItem(0, new ItemStack(Material.BOOK));
 	}
 
-	private void loadDefautShop() {
+	private void loadDefaultShop() {
 		shop = new Menu("Default", 3, this);
 	}
 
+	@NotNull
 	@Override
 	public Inventory getInventory() {
 		return shop.inventory();

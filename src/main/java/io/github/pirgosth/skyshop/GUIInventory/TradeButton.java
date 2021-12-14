@@ -23,7 +23,7 @@ public class TradeButton extends ChangeInvButton {
 	}
 
 	private void loadLore() {
-		ArrayList<String> lore = new ArrayList<String>();
+		ArrayList<String> lore = new ArrayList<>();
 		if (buy != -1)
 			lore.add("&7Buy: &2" + buy + "&7$");
 		if (sell != -1)
@@ -32,7 +32,7 @@ public class TradeButton extends ChangeInvButton {
 		if (buy != -1)
 			lore.add("&7&lLeft clic to buy");
 		if (sell != -1) {
-			lore.add("&7&lMiddle clic to sell all");
+			lore.add("&7&lShift right clic to sell all");
 			lore.add("&7&lRight clic to sell");
 		}
 		Utility.colorTranslate(lore);
@@ -44,18 +44,13 @@ public class TradeButton extends ChangeInvButton {
 	@Override
 	public void onClick(InventoryClickEvent event) {
 		switch (event.getClick()) {
-		case LEFT:
-			this.next = this.buy != -1 ? new BuyMenu(this) : null;
-			break;
-		case RIGHT:
-			this.next = this.sell != -1 ? new SellMenu(this) : null;
-			break;
-		case MIDDLE:
-			this.next = null;
-			sellEverything(event);
-			break;
-		default:
-			break;
+			case LEFT -> this.next = this.buy != -1 ? new BuyMenu(this) : null;
+			case RIGHT -> this.next = this.sell != -1 ? new SellMenu(this) : null;
+			case SHIFT_RIGHT -> {
+				this.next = null;
+				sellEverything(event);
+			}
+			default -> this.next = null;
 		}
 		super.onClick(event);
 	}

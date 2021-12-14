@@ -1,17 +1,16 @@
 package io.github.pirgosth.skyshop;
 
-import java.util.logging.Level;
-
 import io.github.pirgosth.liberty.core.LibertyCore;
 import io.github.pirgosth.liberty.core.api.LibertyCoreAPI;
 import io.github.pirgosth.skyshop.commands.AdminCommands;
 import io.github.pirgosth.skyshop.commands.Commands;
+import lombok.Getter;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import lombok.Getter;
-import net.milkbowl.vault.economy.Economy;
+import java.util.logging.Level;
 
 public class SkyShop extends JavaPlugin {
 	@Getter
@@ -52,6 +51,7 @@ public class SkyShop extends JavaPlugin {
 			shop.load();
 		} catch (Exception e) {
 			Bukkit.getLogger().log(Level.WARNING, e.toString());
+			e.printStackTrace();
 		}
 
 		LibertyCoreAPI coreAPI = LibertyCore.getInstance();
