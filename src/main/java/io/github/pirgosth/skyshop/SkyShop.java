@@ -58,7 +58,6 @@ public class SkyShop extends JavaPlugin {
 		LibertyCoreAPI coreAPI = LibertyCore.getInstance();
 		coreAPI.getCommandRegister().register(this, new Commands());
 		coreAPI.getCommandRegister().register(this, new AdminCommands());
-//		getCommand("shop").setTabCompleter(new AutoCompletion());
 		getServer().getPluginManager().registerEvents(new EventListener(), this);
 	}
 
