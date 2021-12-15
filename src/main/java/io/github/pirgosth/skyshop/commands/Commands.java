@@ -4,6 +4,7 @@ import io.github.pirgosth.liberty.core.api.commands.ICommandListener;
 import io.github.pirgosth.liberty.core.api.commands.annotations.LibertyCommand;
 import io.github.pirgosth.liberty.core.commands.CommandParameters;
 import io.github.pirgosth.skyshop.SkyShop;
+import io.github.pirgosth.skyshop.models.SkyConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -42,6 +43,7 @@ public class Commands implements ICommandListener {
 		}
 		SkyShop.getMainConfig().reload();
 		try {
+			SkyConfig.reloadConfiguration();
 			SkyShop.getShop().reload();
 		} catch (Exception e) {
 			Bukkit.getLogger().log(Level.WARNING, e.toString());

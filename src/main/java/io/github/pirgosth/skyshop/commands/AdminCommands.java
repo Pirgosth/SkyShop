@@ -47,14 +47,14 @@ public class AdminCommands implements ICommandListener {
     }
 
     @LibertyCommand(command = "shopadmin.category.edit.name")
+    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
+    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
     @LibertyCommandArgument(type = ICommandArgument.ArgumentType.String)
-    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
-    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
     public boolean editCategoryName(CommandParameters params) throws Exception {
         CommandSender sender = params.sender;
-        String name = params.args[0];
-        int x = Integer.parseInt(params.args[1]);
-        int y = Integer.parseInt(params.args[2]);
+        int x = Integer.parseInt(params.args[0]);
+        int y = Integer.parseInt(params.args[1]);
+        String name = params.args[2];
 
         SkyShop.getMainConfig().editCategoryName(name, x, y);
         sender.sendMessage(Utility.colorTranslate("&2[SkyShop] &7Category name successfully renamed."));
@@ -63,14 +63,14 @@ public class AdminCommands implements ICommandListener {
     }
 
     @LibertyCommand(command = "shopadmin.category.edit.desc")
+    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
+    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
     @LibertyCommandArgument(type = ICommandArgument.ArgumentType.String)
-    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
-    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
     public boolean editCategoryDescription(CommandParameters params) throws Exception {
         CommandSender sender = params.sender;
-        String desc = params.args[0];
-        int x = Integer.parseInt(params.args[1]);
-        int y = Integer.parseInt(params.args[2]);
+        int x = Integer.parseInt(params.args[0]);
+        int y = Integer.parseInt(params.args[1]);
+        String desc = params.args[2];
 
         SkyShop.getMainConfig().editCategoryDescription(desc, x, y);
         sender.sendMessage(Utility.colorTranslate("&2[SkyShop] &7Category description successfully renamed."));
@@ -143,16 +143,16 @@ public class AdminCommands implements ICommandListener {
     @LibertyCommand(command = "shopadmin.item.edit.name")
     @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
     @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
+    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
+    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
     @LibertyCommandArgument(type = ICommandArgument.ArgumentType.String)
-    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
-    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
     public boolean editItemName(CommandParameters params) throws Exception {
         CommandSender sender = params.sender;
         int catX = Integer.parseInt(params.args[0]);
         int catY = Integer.parseInt(params.args[1]);
-        String name = params.args[2];
-        int x = Integer.parseInt(params.args[3]);
-        int y = Integer.parseInt(params.args[4]);
+        int x = Integer.parseInt(params.args[2]);
+        int y = Integer.parseInt(params.args[3]);
+        String name = params.args[4];
 
         SkyShop.getMainConfig().editItemName(catX, catY, name, x, y);
         sender.sendMessage(Utility.colorTranslate(String.format("&2[SkyShop] &7Item successfully renamed to %s.", name)));
@@ -163,16 +163,16 @@ public class AdminCommands implements ICommandListener {
     @LibertyCommand(command = "shopadmin.item.edit.buy")
     @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
     @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
+    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
+    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
     @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Float)
-    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
-    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
     public boolean editItemBuyPrice(CommandParameters params) throws Exception {
         CommandSender sender = params.sender;
         int catX = Integer.parseInt(params.args[0]);
         int catY = Integer.parseInt(params.args[1]);
-        float buy = Float.parseFloat(params.args[2]);
-        int x = Integer.parseInt(params.args[3]);
-        int y = Integer.parseInt(params.args[4]);
+        int x = Integer.parseInt(params.args[2]);
+        int y = Integer.parseInt(params.args[3]);
+        float buy = Float.parseFloat(params.args[4]);
 
         SkyShop.getMainConfig().editItemBuyPrice(catX, catY, buy, x, y);
         sender.sendMessage(Utility.colorTranslate(String.format("&2[SkyShop] &7Item buy price successfully edited to %s.", buy)));
@@ -183,16 +183,16 @@ public class AdminCommands implements ICommandListener {
     @LibertyCommand(command = "shopadmin.item.edit.sell")
     @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
     @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
+    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
+    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
     @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Float)
-    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
-    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
     public boolean editItemSellPrice(CommandParameters params) throws Exception {
         CommandSender sender = params.sender;
         int catX = Integer.parseInt(params.args[0]);
         int catY = Integer.parseInt(params.args[1]);
-        float sell = Float.parseFloat(params.args[2]);
-        int x = Integer.parseInt(params.args[3]);
-        int y = Integer.parseInt(params.args[4]);
+        int x = Integer.parseInt(params.args[2]);
+        int y = Integer.parseInt(params.args[3]);
+        float sell = Float.parseFloat(params.args[4]);
 
         SkyShop.getMainConfig().editItemSellPrice(catX, catY, sell, x, y);
         sender.sendMessage(Utility.colorTranslate(String.format("&2[SkyShop] &7Item sell price successfully edited to %s.", sell)));
