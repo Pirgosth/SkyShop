@@ -4,6 +4,7 @@ import io.github.pirgosth.liberty.core.LibertyCore;
 import io.github.pirgosth.liberty.core.api.LibertyCoreAPI;
 import io.github.pirgosth.skyshop.commands.AdminCommands;
 import io.github.pirgosth.skyshop.commands.Commands;
+import io.github.pirgosth.skyshop.models.SkyConfig;
 import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -64,6 +65,6 @@ public class SkyShop extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		Bukkit.getConsoleSender().sendMessage("Plugin is shutting down ...");
-		mainConfig.save();
+		SkyConfig.getConfiguration().save();
 	}
 }

@@ -30,8 +30,8 @@ public class ItemConfig implements ConfigurationSerializable {
                 (map.get("material") instanceof String) ? (String) map.get("material") : "",
                 (map.get("x") instanceof Integer) ? (Integer) map.get("x") : -1,
                 (map.get("y") instanceof Integer) ? (Integer) map.get("y") : -1,
-                (map.get("buy") instanceof Float) ? (Float) map.get("buy") : 0f,
-                (map.get("sell") instanceof Float) ? (Float) map.get("sell") : 0f
+                (map.get("buy") instanceof Double) ? ((Double)map.get("buy")).floatValue() : 0f,
+                (map.get("sell") instanceof Double) ? ((Double)map.get("sell")).floatValue() : 0f
         );
     }
 
