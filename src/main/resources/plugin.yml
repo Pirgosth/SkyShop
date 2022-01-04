@@ -5,7 +5,7 @@ api-version: 1.18
 depend:
   - LibertyCore
   - Vault
-softdepend: [Multiverse-Core]
+softdepend: [ Multiverse-Core ]
 command-complete: true
 author: Pirgosth
 commands:
@@ -27,4 +27,6 @@ permissions:
     children:
       skyshop.command.reload: true
       skyshop.command.shop: true
-      
+  skyshop.admin.command.*:
+    description: Grant admin command wildcard permissions
+    default: op

@@ -4,12 +4,14 @@ import io.github.pirgosth.liberty.core.api.commands.ICommandArgument;
 import io.github.pirgosth.liberty.core.api.commands.ICommandListener;
 import io.github.pirgosth.liberty.core.api.commands.annotations.LibertyCommand;
 import io.github.pirgosth.liberty.core.api.commands.annotations.LibertyCommandArgument;
+import io.github.pirgosth.liberty.core.api.commands.annotations.LibertyCommandPermission;
 import io.github.pirgosth.liberty.core.commands.CommandParameters;
 import io.github.pirgosth.skyshop.SkyShop;
 import io.github.pirgosth.skyshop.Utility;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 
+@LibertyCommandPermission(permission = "skyshop.admin.command.*")
 public class AdminCommands implements ICommandListener {
 
     @LibertyCommand(command = "shopadmin.category.add")
