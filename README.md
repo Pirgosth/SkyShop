@@ -20,6 +20,8 @@ These commands allow you to *add/edit/remove/move* `categories` and `items` from
 
 - `/shopadmin category edit desc [x] [y] [desc]`: Change category description with `desc` at position `x` and `y`.
 
+- `/shopadmin category edit material [x] [y] [material]`: Change category material with `material` at position `x` and `y`.
+
 - `/shopadmin category move [from_x] [from_y] [to_x] [to_y]`: Move category from `from_x` and `from_y` to `to_x` and `to_y`. Send an error if target position is already taken.
 
 **Note: Be careful to respect position borders, whether between `0` and `8` for `x` and between `0` and `2` for `y`.**
@@ -35,7 +37,9 @@ These commands allow you to *add/edit/remove/move* `categories` and `items` from
 
 - `/shopadmin item edit buy [cat_x] [cat_y] [x] [y] [buy]`: Change item buying price in category (at `cat_x`, `cat_y`) with `buy` at position `x` and `y`.
 
-- `/shopadmin item edit buy [cat_x] [cat_y] [x] [y] [sell]`: Change item selling price in category (at `cat_x`, `cat_y`) with `sell` at position `x` and `y`.
+- `/shopadmin item edit sell [cat_x] [cat_y] [x] [y] [sell]`: Change item selling price in category (at `cat_x`, `cat_y`) with `sell` at position `x` and `y`.
+
+- `/shopadmin item edit material [cat_x] [cat_y] [x] [y] [material]`: Change item material in category (at `cat_x`, `cat_y`) with `material` at position `x` and `y`.
 
 - `/shopadmin item move [cat_x] [cat_y] [from_x] [from_y] [to_x] [to_y]`: Move item in category (at `cat_x`, `cat_y`) from `from_x` and `from_y` to `to_x` and `to_y`. Send an error if target position is already taken.
 

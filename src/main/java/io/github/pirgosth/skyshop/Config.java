@@ -151,6 +151,15 @@ public class Config implements IConfig {
     }
 
     @Override
+    public void editCategoryMaterial(Material material, int x, int y) throws Exception {
+        CategoryConfig cat = SkyConfig.getConfiguration().shopSection.getCategoryAt(x, y);
+        if (cat == null) throw new Exception(String.format("There's no category at (%s;%s).", x, y));
+        cat.material = material.toString();
+        SkyConfig.getConfiguration().save();
+        SkyShop.getShop().reload();
+    }
+
+    @Override
     public void moveCategory(int fromX, int fromY, int toX, int toY) throws Exception {
         CategoryConfig cat = SkyConfig.getConfiguration().shopSection.getCategoryAt(fromX, fromY);
         if (cat == null) throw new Exception(String.format("There's no category at (%s;%s).", fromX, fromY));
@@ -219,6 +228,17 @@ public class Config implements IConfig {
         ItemConfig item = cat.getItemAt(x, y);
         if (item == null) throw new Exception(String.format("There's no item at (%s;%s).", x, y));
         item.sell = sell;
+        SkyConfig.getConfiguration().save();
+        SkyShop.getShop().reload();
+    }
+
+    @Override
+    public void editItemMaterial(int catX, int catY, Material material, int x, int y) throws Exception {
+        CategoryConfig cat = SkyConfig.getConfiguration().shopSection.getCategoryAt(catX, catY);
+        if (cat == null) throw new Exception(String.format("There's no category at (%s;%s).", catX, catY));
+        ItemConfig item = cat.getItemAt(x, y);
+        if (item == null) throw new Exception(String.format("There's no item at (%s;%s).", x, y));
+        item.material = material.toString();
         SkyConfig.getConfiguration().save();
         SkyShop.getShop().reload();
     }

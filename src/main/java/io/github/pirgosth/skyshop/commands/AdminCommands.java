@@ -80,6 +80,22 @@ public class AdminCommands implements ICommandListener {
         return true;
     }
 
+    @LibertyCommand(command = "shopadmin.category.edit.material")
+    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
+    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
+    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.String)
+    public boolean editCategoryMaterial(CommandParameters params) throws Exception {
+        CommandSender sender = params.sender;
+        int x = Integer.parseInt(params.args[0]);
+        int y = Integer.parseInt(params.args[1]);
+        Material material = Utility.getMaterial(params.args[2]);
+
+        SkyShop.getMainConfig().editCategoryMaterial(material, x, y);
+        sender.sendMessage(Utility.colorTranslate(String.format("&2[SkyShop] &7Item material successfully edited to %s.", material)));
+
+        return true;
+    }
+
     @LibertyCommand(command = "shopadmin.category.move")
     @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
     @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
@@ -198,6 +214,26 @@ public class AdminCommands implements ICommandListener {
 
         SkyShop.getMainConfig().editItemSellPrice(catX, catY, sell, x, y);
         sender.sendMessage(Utility.colorTranslate(String.format("&2[SkyShop] &7Item sell price successfully edited to %s.", sell)));
+
+        return true;
+    }
+
+    @LibertyCommand(command = "shopadmin.item.edit.material")
+    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
+    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
+    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
+    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.Integer)
+    @LibertyCommandArgument(type = ICommandArgument.ArgumentType.String)
+    public boolean editItemMaterial(CommandParameters params) throws Exception {
+        CommandSender sender = params.sender;
+        int catX = Integer.parseInt(params.args[0]);
+        int catY = Integer.parseInt(params.args[1]);
+        int x = Integer.parseInt(params.args[2]);
+        int y = Integer.parseInt(params.args[3]);
+        Material material = Utility.getMaterial(params.args[4]);
+
+        SkyShop.getMainConfig().editItemMaterial(catX, catY, material, x, y);
+        sender.sendMessage(Utility.colorTranslate(String.format("&2[SkyShop] &7Item material successfully edited to %s.", material)));
 
         return true;
     }

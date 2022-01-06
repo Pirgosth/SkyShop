@@ -24,6 +24,7 @@ public interface IConfig {
     void removeCategory(int x, int y) throws Exception;
     void editCategoryName(String name, int x, int y) throws Exception;
     void editCategoryDescription(String desc, int x, int y) throws Exception;
+    void editCategoryMaterial(Material material, int x, int y) throws Exception;
     void moveCategory(int fromX, int fromY, int toX, int toY) throws Exception;
 
     void addItem(int catX, int catY, String name, Material material, int x, int y, float buy, float sell) throws Exception;
@@ -32,6 +33,7 @@ public interface IConfig {
     void editItemName(int catX, int catY, String name, int x, int y) throws Exception;
     void editItemBuyPrice(int catX, int catY, float buy, int x, int y) throws Exception;
     void editItemSellPrice(int catX, int catY, float sell, int x, int y) throws Exception;
+    void editItemMaterial(int catX, int catY, Material material, int x, int y) throws Exception;
     void moveItem(int catX, int catY, int fromX, int fromY, int toX, int toY) throws Exception;
 
     Menu loadShop() throws Exception;
