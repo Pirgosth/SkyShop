@@ -9,13 +9,13 @@ import org.bukkit.entity.Player;
 public abstract class TradeMenu extends Menu {
 	protected int amount;
 	protected TradeButton item;
-	private HashMap<Player, Long> times;
+	private final HashMap<Player, Long> times;
 
 	public TradeMenu(TradeButton item, String prefix) {
 		super(prefix + " " + ChatColor.stripColor(item.name()), 6, item.parent().holder(), item.parent());
 		this.item = item;
 		amount = 1;
-		times = new HashMap<Player, Long>();
+		times = new HashMap<>();
 		refresh();
 		addButton(new ChangeInvButton("Back", Material.ACACIA_DOOR, 4, 5, null, this, item.parent()));
 	}
@@ -57,17 +57,17 @@ public abstract class TradeMenu extends Menu {
 	}
 
 	public void add(int amount) {
-		this.amount = this.amount + amount > 64 ? 64 : this.amount + amount;
+		this.amount = Math.min(this.amount + amount, 64);
 		refresh();
 	}
 
 	public void reduce(int amount) {
-		this.amount = this.amount - amount < 1 ? 1 : this.amount - amount;
+		this.amount = Math.max(this.amount - amount, 1);
 		refresh();
 	}
 
 	public void set(int amount) {
-		this.amount = amount < 1 ? 1 : amount;
+		this.amount = Math.max(amount, 1);
 		refresh();
 	}
 

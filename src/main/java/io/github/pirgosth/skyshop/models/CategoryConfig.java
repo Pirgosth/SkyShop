@@ -1,5 +1,6 @@
 package io.github.pirgosth.skyshop.models;
 
+import io.github.pirgosth.liberty.core.api.utils.SerializationUtils;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,25 +32,8 @@ public class CategoryConfig implements ConfigurationSerializable {
                 (map.get("material") instanceof String) ? (String) map.get("material") : "",
                 (map.get("x") instanceof Integer) ? (Integer) map.get("x") : -1,
                 (map.get("y") instanceof Integer) ? (Integer) map.get("y") : -1,
-                List.class.isAssignableFrom(map.get("items").getClass()) ? CategoryConfig.safetyItemsCast((List<?>) map.get("items")) : new ArrayList<>()
+                List.class.isAssignableFrom(map.get("items").getClass()) ? SerializationUtils.safeListCast(ItemConfig.class, (List<?>) map.get("items")) : new ArrayList<>()
         );
-    }
-
-    private static List<ItemConfig> safetyItemsCast(List<?> rawItems) {
-        List<ItemConfig> items = new ArrayList<>();
-
-        for (Object obj : rawItems) {
-            if (Map.class.isAssignableFrom(obj.getClass())) {
-                Map<String, Object> values = new LinkedHashMap<>();
-                for(Map.Entry<?, ?> entry : ((Map<?, ?>) obj).entrySet()) {
-                    if(entry.getKey() instanceof String) values.put((String) entry.getKey(), entry.getValue());
-                }
-
-                items.add(new ItemConfig(values));
-            }
-        }
-
-        return items;
     }
 
     @NotNull

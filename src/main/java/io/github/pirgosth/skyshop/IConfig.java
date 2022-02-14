@@ -6,18 +6,11 @@ import io.github.pirgosth.skyshop.models.CategoryConfig;
 import io.github.pirgosth.skyshop.models.ItemConfig;
 import org.bukkit.Material;
 
-import java.util.ArrayList;
-
 public interface IConfig {
 
     void load();
     void reload();
     void save();
-    void cleanConfig();
-
-    ArrayList<String> getActiveWorlds();
-    boolean addActiveWorld(String world);
-    boolean delActiveWorld(String world);
 
     void addCategory(String name, String description, Material material, int x, int y) throws Exception;
     ChangeInvButton getCategory(CategoryConfig cat, Menu parent) throws Exception;

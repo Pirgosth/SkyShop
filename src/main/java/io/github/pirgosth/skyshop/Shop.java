@@ -27,7 +27,8 @@ public class Shop implements InventoryHolder {
 		try {
 			shop = SkyShop.getMainConfig().loadShop();
 		} catch (Exception e) {
-			Bukkit.getLogger().log(Level.WARNING, "SkyShoping Default Config ...");
+			Bukkit.getLogger().log(Level.WARNING, "Error in config, loading SkyShop default config ...");
+			e.printStackTrace();
 			this.loadDefaultShop();
 			throw e;
 		}
@@ -36,7 +37,6 @@ public class Shop implements InventoryHolder {
 	public void reload() throws Exception {
 		players = new HashMap<>();
 		load();
-		// shop.getInventory().setItem(0, new ItemStack(Material.BOOK));
 	}
 
 	private void loadDefaultShop() {

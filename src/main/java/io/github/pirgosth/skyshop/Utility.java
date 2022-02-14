@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class Utility {
 	public static ArrayList<String> getWorldNames() {
-		ArrayList<String> worlds = new ArrayList<String>();
+		ArrayList<String> worlds = new ArrayList<>();
 		for (World world : Bukkit.getWorlds()) {
 			worlds.add(world.getName());
 		}
@@ -47,22 +47,40 @@ public class Utility {
 		}
 	}
 
+	public static int getRequiredSlots(ItemStack stack) {
+		int itemStackSize = stack.getMaxStackSize();
+		return stack.getAmount() / itemStackSize + (stack.getAmount() % itemStackSize == 0 ? 0 : 1);
+	}
+
 	public static boolean canFitInInventory(ItemStack stack, Inventory inv) {
 		int emptyCount = 0;
-		int requiredSlots = stack.getAmount() / 64 + (stack.getAmount() % 64 == 0 ? 0 : 1);
-		int emptyStacks = 0;
+		int itemStackSize = stack.getMaxStackSize();
+		int requiredSlots = getRequiredSlots(stack);
+		int emptyAmount = 0;
 		for (ItemStack slot : inv.getStorageContents()) {
 			if (slot == null || slot.getType() == Material.AIR) {
 				emptyCount++;
-				emptyStacks += 64;
+				emptyAmount += itemStackSize;
 			}
 			if (slot != null && slot.getType() == stack.getType()) {
-				emptyStacks += (64 - slot.getAmount());
+				emptyAmount += (itemStackSize - slot.getAmount());
 			}
-			if (emptyCount >= requiredSlots || emptyStacks >= stack.getAmount())
+			if (emptyCount >= requiredSlots || emptyAmount >= stack.getAmount())
 				return true;
 		}
 		return false;
+	}
+
+	public static List<ItemStack> getLegalItemStack(ItemStack stack) {
+		int itemStackSize = stack.getMaxStackSize();
+		int requiredSlots = getRequiredSlots(stack);
+		int amount = stack.getAmount();
+		List<ItemStack> stacks = new ArrayList<>();
+		for (int i = 0; i < requiredSlots; i++) {
+			stacks.add(new ItemStack(stack.getType(), Math.min(amount, itemStackSize)));
+			amount -= itemStackSize;
+		}
+		return stacks;
 	}
 
 	public static int countInInventory(ItemStack stack, Inventory inv) {

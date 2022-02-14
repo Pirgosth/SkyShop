@@ -2,6 +2,7 @@ package io.github.pirgosth.skyshop.GUIInventory;
 
 import java.util.List;
 
+import io.github.pirgosth.liberty.core.api.utils.ChatUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -27,14 +28,12 @@ public class BuyButton extends Button {
 		Material type = parent.item().stack().getType();
 		Player player = (Player) event.getWhoClicked();
 		if (!Utility.canFitInInventory(new ItemStack(type, amount), player.getInventory())) {
-			player.sendMessage(Utility.colorTranslate(
-					"&2[SkyShop] &7You don't have enought free space in your inventory to perform this."));
+			ChatUtils.sendColorMessage(player,"&2[SkyShop] &7You don't have enough free space in your inventory to perform this.");
 			return;
 		}
 		if (SkyShop.getEconomy().withdrawPlayer(player, price).type == EconomyResponse.ResponseType.SUCCESS) {
-			player.sendMessage(Utility.colorTranslate(
-					"&2[SkyShop] &7You purchase &2x" + amount + " " + name + " &7for &2" + price + "$"));
-			player.getInventory().addItem(new ItemStack(type, amount));
+			ChatUtils.sendColorMessage(player, String.format("&2[SkyShop] &7You purchase &2x%s %s &7for &2%s$", amount, name, price));
+			player.getInventory().addItem(Utility.getLegalItemStack(new ItemStack(type, amount)).toArray(new ItemStack[0]));
 		} else {
 			player.sendMessage(Utility.colorTranslate(
 					"&2[SkyShop] &7You need &4" + (price - SkyShop.getEconomy().getBalance(player)) + "$ &7to buy this."));

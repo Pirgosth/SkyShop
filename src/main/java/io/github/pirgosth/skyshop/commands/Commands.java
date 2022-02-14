@@ -11,7 +11,6 @@ import io.github.pirgosth.skyshop.models.SkyConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import java.util.logging.Level;
@@ -22,8 +21,8 @@ public class Commands implements ICommandListener {
 	@LibertyCommandPermission(permission = "skyshop.command.shop")
 	@LibertyCommandExecutor(executor = CommandExecutor.ENTITY)
 	public boolean shop(CommandParameters params) {
-		Entity sender = (Entity) params.sender;
-		Player player = (Player) sender;
+		Player player = (Player) params.sender;
+		if(!SkyConfig.getConfiguration().isWorldEnabled(player.getWorld().getName())) return true;
 		SkyShop.getShop().openInventory(player);
 		return true;
 	}
